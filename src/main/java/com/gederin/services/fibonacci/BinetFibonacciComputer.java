@@ -1,4 +1,4 @@
-package com.gederin.services;
+package com.gederin.services.fibonacci;
 
 import org.springframework.stereotype.Service;
 

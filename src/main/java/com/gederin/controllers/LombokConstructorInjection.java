@@ -1,9 +1,10 @@
 package com.gederin.controllers;
 
-import com.gederin.services.FibonacciComputer;
+import com.gederin.services.fibonacci.FibonacciComputer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StopWatch;
 
 import lombok.AllArgsConstructor;
 
@@ -11,9 +12,11 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class LombokConstructorInjection {
     private FibonacciComputer fibonacciComputer;
+    private StopWatch stopWatch;
 
     public void printFibonacciNumber(int n) {
-        System.out.print("using " + fibonacciComputer.getClass().getSimpleName() + " ==> ");
-        System.out.println("fibonacci number on poistion " + n + ": " + fibonacciComputer.computeFibonacciNumber(n));
+        stopWatch.start("caclulating fibonacci number with linnear strategy");
+        System.out.println("using " + fibonacciComputer.getClass().getSimpleName() + " ==> " + "fibonacci number on poistion " + n + ": " + fibonacciComputer.computeFibonacciNumber(n));
+        stopWatch.stop();
     }
 }
