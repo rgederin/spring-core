@@ -1,4 +1,4 @@
-package com.gederin.controllers;
+package com.gederin.controllers.injections;
 
 import com.gederin.services.fibonacci.FibonacciComputer;
 
@@ -8,18 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StopWatch;
 
 @Controller
-public class ConstructorInjection {
-    private FibonacciComputer fibonacciComputer;
-    private StopWatch stopWatch;
+public class PropertyInjection {
 
     @Autowired
-    public ConstructorInjection(@Qualifier("linnearFibonacciComputer") FibonacciComputer fibonacciComputer, StopWatch stopWatch) {
-        this.fibonacciComputer = fibonacciComputer;
-        this.stopWatch = stopWatch;
-    }
+    @Qualifier("recursiveFibonacciComputer")
+    private FibonacciComputer fibonacciComputer;
 
-    public void printFibonacciNumber(int n) {
-        stopWatch.start("caclulating fibonacci number with linnear strategy");
+    @Autowired
+    private StopWatch stopWatch;
+
+    public void computeFibonacciNumber(int n) {
+        stopWatch.start("caclulating fibonacci number with recurcive strategy");
         System.out.println("using " + fibonacciComputer.getClass().getSimpleName() + " ==> " + "fibonacci number on poistion " + n + ": " + fibonacciComputer.computeFibonacciNumber(n));
         stopWatch.stop();
     }

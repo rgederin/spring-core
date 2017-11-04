@@ -12,7 +12,7 @@ public class StopWatchController {
 
     private StopWatch stopWatch;
 
-    public void printFibonacciExecutionStatistics() {
+    public void printTasksStatistics() {
         System.out.println(stopWatch.prettyPrint());
     }
 }
