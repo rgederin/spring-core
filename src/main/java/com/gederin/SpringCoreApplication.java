@@ -1,5 +1,7 @@
 package com.gederin;
 
+import com.gederin.configurations.FibonacciProperties;
+import com.gederin.configurations.SearchProperties;
 import com.gederin.controllers.SearchComputerController;
 import com.gederin.controllers.StopWatchController;
 import com.gederin.controllers.injections.ConstructorInjection;
@@ -21,14 +23,17 @@ public class SpringCoreApplication {
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(SpringCoreApplication.class, args);
 
+        FibonacciProperties fibonacciProperties = ctx.getBean(FibonacciProperties.class);
+        SearchProperties searchProperties = ctx.getBean(SearchProperties.class);
+
         System.out.println("\n ******************** \n");
 
-        ctx.getBean(PropertyInjection.class).computeFibonacciNumber(45);
-        ctx.getBean(SetterInjection.class).printFibonacciNumber(70);
-        ctx.getBean(ConstructorInjection.class).printFibonacciNumber(70);
-        ctx.getBean(LombokConstructorInjection.class).printFibonacciNumber(70);
+        ctx.getBean(PropertyInjection.class).computeFibonacciNumber(fibonacciProperties.getRecursive());
+        ctx.getBean(SetterInjection.class).printFibonacciNumber(fibonacciProperties.getBinet());
+        ctx.getBean(ConstructorInjection.class).printFibonacciNumber(fibonacciProperties.getLinnear());
+        ctx.getBean(LombokConstructorInjection.class).printFibonacciNumber(fibonacciProperties.getLinnear());
 
-        int[] randomArray = ctx.getBean(RandomArrayGenerator.class).generateRandomIntArray(30_000_000);
+        int[] randomArray = ctx.getBean(RandomArrayGenerator.class).generateRandomIntArray(searchProperties.getSearchArraySize());
         ctx.getBean(SearchComputerController.class).findElement(randomArray, 102000);
 
         System.out.println("\n ******************** \n");

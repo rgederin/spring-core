@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: binary
+
+fibonacci:
+  recursive: 40
+  binet: 60
+  linnear: 60
